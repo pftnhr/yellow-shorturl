@@ -1,4 +1,4 @@
-# Shorturl 0.8.19
+# Shorturl 0.9.1
 
 Converts links into short URLs with the help of YOURLS
 

@@ -2,7 +2,7 @@
 // ShortUrl extension, https://github.com/pftnhr/yellow-shorturl
 
 class YellowShorturl {
-    const VERSION = "0.8.19";
+    const VERSION = "0.9.1";
     public $yellow;         // access to API
     
     public function onLoad($yellow) {
@@ -11,7 +11,7 @@ class YellowShorturl {
         $this->yellow->system->setDefault("ShorturlSecret", "secret signature token from <your host>/admin/tools.php");
     }
     
-    public function onParseContentShortcut($page, $name, $text, $type) {
+    public function onParseContentElement($page, $name, $text, $attributes, $type) {
         $output = null;
         if ($name=="shorturl" && ($type=="block" || $type=="inline")) {
             list($shorturlLong, $shorturlKeyword, $shorturlTitle) = $this->yellow->toolbox->getTextArguments($text);
