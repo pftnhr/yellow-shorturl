@@ -7,6 +7,7 @@ class YellowShorturl {
     
     public function onLoad($yellow) {
         $this->yellow = $yellow;
+        $this->yellow->system->setDefault("ShorturlHost", "<your host>"); // including trailing slash, e.g. https://sho.rt/
         $this->yellow->system->setDefault("ShorturlApi", "<your host>/yourls-api.php");
         $this->yellow->system->setDefault("ShorturlSecret", "secret signature token from <your host>/admin/tools.php");
     }
@@ -22,15 +23,16 @@ class YellowShorturl {
                                     $page->location);
             $shorturlKeyword = $page->get("keyword");
             $shorturlTitle   = $page->get("title");
+            $shorturlHost    = $this->yellow->system->get("ShorturlHost");
             $shorturlApi     = $this->yellow->system->get("ShorturlApi");
             $shorturlSecret  = $this->yellow->system->get("ShorturlSecret");
             
-            $output .= $this->shortenWithYourls($shorturlLong, $shorturlKeyword, $shorturlTitle, $shorturlApi, $shorturlSecret);
+            $output .= $this->shortenWithYourls($shorturlLong, $shorturlKeyword, $shorturlTitle, $shorturlHost, $shorturlApi, $shorturlSecret);
         }
         return $output;
     }
     
-    public function shortenWithYourls($shorturlLong, $shorturlKeyword, $shorturlTitle, $shorturlApi, $shorturlSecret) {
+    public function shortenWithYourls($shorturlLong, $shorturlKeyword, $shorturlTitle, $shorturlHost, $shorturlApi, $shorturlSecret) {
        $shortUrl = null;
        /*
         * YOURLS : sample file showing how to use the API
@@ -42,17 +44,18 @@ class YellowShorturl {
         *
         */
        
-       // EDIT THIS: your auth parameters
+       // your auth parameters
        $signature = $shorturlSecret;
        
-       // EDIT THIS: the query parameters
-       $url     = $shorturlLong;            // URL to shrink
-       $keyword = $shorturlKeyword;         // custom Keyword (optional)
-       $title   = $shorturlTitle;           // title (optional)
-       $format  = 'json';                   // output format: 'json', 'xml' or 'simple'
+       // the query parameters
+       $url       = $shorturlLong;            // URL to shrink
+       $keyword   = $shorturlKeyword;         // custom Keyword (optional)
+       $title     = $shorturlTitle;           // title (optional)
+       $format    = 'json';                   // output format: 'json', 'xml' or 'simple'
        
-       // EDIT THIS: the URL of the API file
-       $api_url = $shorturlApi;
+       // the URL of you host and the API file
+       $api_host  = $shorturlHost
+       $api_url   = $shorturlApi;
        
        
        // Init the CURL session
@@ -97,7 +100,7 @@ class YellowShorturl {
             curl_close($chGet);
             
             $dataGet = json_decode( $dataGet );
-            $shortUrl = '<your YOURLS host>'.$dataGet->keyword;     // Replace "<your YOUR YOURLS host>" with the URL (including the trailing slash!) of your Yourls installation
+            $shortUrl = $api_host.$dataGet->keyword;     // Replace "<your YOUR YOURLS host>" with the URL (including the trailing slash!) of your Yourls installation
             
        } else {
            
