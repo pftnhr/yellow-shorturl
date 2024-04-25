@@ -16,7 +16,7 @@ Insert `<?php echo $page->parseContentShortcut("shorturl", "", "inline") ?>` at 
 
 ## Examples
 
-<a title="Short URL to this post" aria-label="Short URL to <?php echo $page->getHtml("title") ?>" href="<?php echo $page->parseContentShortcut("shorturl", "", "inline") ?>">#</a>
+    <a title="Short URL to this post" aria-label="Short URL to <?php echo $page->getHtml("title") ?>" href="<?php echo $page->parseContentShortcut("shorturl", "", "inline") ?>">#</a>
 
 ## Settings
 
