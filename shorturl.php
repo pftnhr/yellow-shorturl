@@ -40,8 +40,6 @@ class YellowShorturl {
         * not from a file hosted on the same server. It's just a bit dumb to make a
         * remote HTTP request to the server the request originates from.
         *
-        * Rename to .php
-        *
         */
        
        // your auth parameters
