@@ -97,7 +97,7 @@ class YellowShorturl {
             curl_close($chGet);
             
             $dataGet = json_decode( $dataGet );
-            $shortUrl = '<your YOURLS host>'.$dataGet->keyword;     // Replace "<your YOUR YOURLS host>" with the URL of your Yourls installation
+            $shortUrl = '<your YOURLS host>'.$dataGet->keyword;     // Replace "<your YOUR YOURLS host>" with the URL (including the trailing slash!) of your Yourls installation
             
        } else {
            
