@@ -12,11 +12,11 @@ A self-hosted [YOURLS](https://github.com/YOURLS) installation and the [yourls-a
 
 ## How to convert links into short URLs
 
-Insert `<?php echo $page->parseContentElement("shorturl", "", "inline", "") ?>` at the desired position in the href attribute and let the magic happen.
+Insert `<?php echo $page->parseContentElement("shorturl", "", "", "inline") ?>` at the desired position in the href attribute and let the magic happen.
 
 ## Examples
 
-    <a title="Short URL to this post" aria-label="Short URL to <?php echo $page->getHtml("title") ?>" href="<?php echo $page->parseContentElement("shorturl", "", "inline", "") ?>">#</a>
+    <a title="Short URL to this post" aria-label="Short URL to <?php echo $page->getHtml("title") ?>" href="<?php echo $page->parseContentElement("shorturl", "", "", "inline") ?>">#</a>
 
 ## Settings
 
